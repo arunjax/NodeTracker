@@ -5,15 +5,6 @@ var fs      = require('fs'),express = require('express'),
 mongoose    = require('mongoose'), nodepath = require('path'),
 everyauth   = require('everyauth');
 
-everyauth.github
-    .appId('6ccf33d1252352de7b4a')
-    .appSecret('17a159d960e513fe2498b075c0b9be42c7fae078')
-    .findOrCreateUser( function (session, accessToken, accessTokenExtra, githubUserMetadata) {
-        var promise = this.Promise();
-        mongoose.model('User').findOrCreateByGithubData(githubUserMetadata, promise);
-        return promise;
-    })
-    .redirectPath('/');
 
 var path = __dirname;
 var app;
@@ -28,6 +19,8 @@ exports.boot = function(params){
 	
     // Import configuration
     require(path + '/conf/configuration.js')(app,express);
+
+    bootAuth(app);
   
     // Bootstrap application
     bootApplication(app);
@@ -38,6 +31,18 @@ exports.boot = function(params){
   
 };
 
+function bootAuth(app) {
+    everyauth.github
+    .appId(app.set('ghId'))
+    .appSecret(app.set('ghSecret'))
+    .findOrCreateUser( function (session, accessToken, accessTokenExtra, githubUserMetadata) {
+        var promise = this.Promise();
+        mongoose.model('User').findOrCreateByGithubData(githubUserMetadata, promise);
+        return promise;
+    })
+    .redirectPath('/');
+
+}
 /**
  *  App settings and middleware
  *  Any of these can be added into the by environment configuration files to 
