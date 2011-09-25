@@ -35,7 +35,20 @@
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
-          <p class="pull-right">Logged in as <a href="#">Arun Kuamr</a></p>
+          <ul class="nav secondary-nav">
+            <li>
+              <% if(everyauth.loggedIn) { %>
+                <a href="#">Arun Kuamr</a>
+              <% } else { %>
+                <a href="/auth/github">LogIn</a>
+              <% } %>
+            </li>
+            <li>
+              <% if(everyauth.loggedIn) { %>
+                <a href="/logout">LogOut</a>
+              <% } %>
+            </li>
+          </ul>
 
         </div>
       </div>
