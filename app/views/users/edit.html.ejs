@@ -1,9 +1,9 @@
 
-	<% params.formAction = '/users/' + params.id + '?_method=put'; %>
-  
-    <h3>
-      Edit User <%= params.id %>
-    </h3>
+<% params.formAction = '/users/' + params.id + '?_method=put'; %>
+
+<h3>
+  Edit User <%= params.id %>
+</h3>
     <% if (params.errors) { %>
     <p>
       <div>Errors:</div>
@@ -12,38 +12,38 @@
       <% } %>
     </p>
     <% } %>
-    <%= partial('_form', {params: params}); %>
-    
-    <script type="text/javascript" src="/js/util/date.js"></script>
-    <script type="text/javascript" src="/js/util/form.js"></script>
-    <script type="text/javascript" src="/js/util/meta.js"></script>
-    <script type="text/javascript" src="/js/util/string.js"></script>
-    <script type="text/javascript" src="/js/util/url.js"></script>
-    <script type="text/javascript" src="/js/models/model.js"></script>
-    <script type="text/javascript" src="/js/models/user.js"></script>
-    <script type="text/javascript">
-      var displayErrors = function (err) {
-        var str = '';
-        for (var p in err) {
-          str += p + ': ' + err[p] + '\\n';
-        }
-        alert(str);
-      };
+<%= partial('_form', {params: params}); %>
 
-      var validateSubmit = function () {
-        var form = document.getElementById('modelItemForm');
-        var params = geddy.util.form.toObject(form);
-        var item = User.create(params);
-        console.log(item);
-        if (item.valid()) {
-          form.submit();
-        }
-        else {
-          displayErrors(item.errors);
-        }
-      };
+<script type="text/javascript" src="/js/util/date.js"></script>
+<script type="text/javascript" src="/js/util/form.js"></script>
+<script type="text/javascript" src="/js/util/meta.js"></script>
+<script type="text/javascript" src="/js/util/string.js"></script>
+<script type="text/javascript" src="/js/util/url.js"></script>
+<script type="text/javascript" src="/js/models/model.js"></script>
+<script type="text/javascript" src="/js/models/user.js"></script>
+<script type="text/javascript">
+  var displayErrors = function (err) {
+    var str = '';
+    for (var p in err) {
+      str += p + ': ' + err[p] + '\\n';
+    }
+    alert(str);
+  };
 
-    </script>    
+  var validateSubmit = function () {
+    var form = document.getElementById('modelItemForm');
+    var params = geddy.util.form.toObject(form);
+    var item = User.create(params);
+    console.log(item);
+    if (item.valid()) {
+      form.submit();
+    }
+    else {
+      displayErrors(item.errors);
+    }
+  };
+
+</script>    
 
 
 
