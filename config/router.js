@@ -34,5 +34,6 @@ router.match('/').to({controller: 'Main', action: 'index'});
 // router.resource('hemispheres');
 
 router.resource('users');
+router.resource('sessions');
 exports.router = router;
 

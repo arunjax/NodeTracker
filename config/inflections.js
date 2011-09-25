@@ -16,4 +16,13 @@ inflections['User'] = User;
 inflections['Users'] = User;
 inflections['user'] = User;
 inflections['users'] = User;
+
+var Session = {"filename":{"singular":"session","plural":"sessions"},"constructor":{"singular":"Session","plural":"Sessions"},"property":{"singular":"session","plural":"sessions"}};
+inflections['session'] = Session;
+inflections['sessions'] = Session;
+inflections['Session'] = Session;
+inflections['Sessions'] = Session;
+inflections['session'] = Session;
+inflections['sessions'] = Session;
+
 module.exports = inflections;
