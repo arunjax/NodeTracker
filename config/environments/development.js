@@ -25,29 +25,11 @@ var config = new function () {
     , key: 'sid'
     , expiry: 14 * 24 * 60 * 60
   };
-  /* SQLite
+  
   this.database = {
     adapter: 'sqlite'
-    , dbName: 'geddy_db'
+    , dbName: 'node_tracker_development'
   };
-  //*/
-  /* CouchDB
-  this.database = {
-		    adapter: 'couchdb'
-		    , hostname: 'localhost'
-		    , dbName: 'geddy_db'
-		    , port: 5984
-  };
-  //*/
-  /*  PostgreSQL
-  this.database = {
-    adapter: 'postgresql',
-    hostname: 'localhost',
-    dbName: 'geddy_db',
-    username: 'postgres',
-    password: null
-  };
-  //*/
 
 }();
 
