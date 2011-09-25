@@ -17,8 +17,11 @@
 */
 
 var Main = function () {
+  var _this = this;
+  this.respondsWith = ['html', 'json', 'js', 'txt'];
+  
   this.index = function (params) {
-    this.respond('Attention all planets of the Solar Federation');
+    _this.respond({params: params});
   };
 };
 
