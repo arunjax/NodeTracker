@@ -10,7 +10,8 @@ User.add({
     githubId: { type: String },
     email: { type: String },
     fullName: { type: String },
-    gravatarId: { type: String }
+    gravatarId: { type: String },
+    createdAt: {type: Date}
 });
 
 User.statics.findOrCreateByGithubData = function (githubUserData, promise) {
