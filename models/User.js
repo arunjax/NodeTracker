@@ -18,7 +18,6 @@ var User = new Schema({
 
 
 User.statics.findOrCreateByGithubData = function (githubUserData, promise) {
-//    return promise.fulfill(1);
     this.findOne( { githubId: githubUserData.id }, function(err, u) {
         if(!u) {
             var U = mongoose.model('User');
