@@ -3,10 +3,42 @@
   <head>
     <title>Controller user: <%= title %></title>
     <%- stylesheet_link_tag('http://twitter.github.com/bootstrap/1.3.0/bootstrap.min.css') %>
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+      }
+    </style>
     <%- csrf_meta_tag() %>
   </head>
-  <body>
-    <div class="container">
+    <div class="topbar">
+      <div class="topbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="/">NodeTracker</a>
+
+          <ul class="nav">
+            <li class="active"><a href="/">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+          <ul class="nav secondary-nav">
+            <li>
+              <% if(everyauth.loggedIn) { %>
+                <a href="#">Arun Kuamr</a>
+              <% } else { %>
+                <a href="/auth/github">LogIn</a>
+              <% } %>
+            </li>
+            <li>
+              <% if(everyauth.loggedIn) { %>
+                <a href="/logout">LogOut</a>
+              <% } %>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+
       <% var flash = request.flash('info').pop(); if (flash) { %>
       <div class="alert-message info">
         <a class="close" href="#">×</a>
@@ -21,9 +53,27 @@
       </div>
       <% }; %>
 
-      <%- body %>
+    <div class="container-fluid">
+      <div class="sidebar">
+        <div class="well">
+          <h5>Quick Links</h5>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="content">
+        <%- body %>
 
+        <footer>
+          <p>&copy; NodeTracker 2011</p>
+
+        </footer>
+      </div>
     </div>
+
   </body>
   <%- javascript_include_tag('https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js', 'rails', 'application') %>
   <script>

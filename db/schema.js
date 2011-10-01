@@ -2,48 +2,38 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId
 
-  , UserSchema        = new Schema
-//, PostSchema        = new Schema
-//, CommentSchema     = new Schema
+  , User        = new Schema
   ;
 
-UserSchema.add({
-    email:           { type: String,   index: true },
-    password:        { type: String    },
-    activated:       { type: Boolean   }
-});
-mongoose.model("User", UserSchema);
-
-/*
-PostSchema.add({
-    title:           { type: String    },
-    content:         { type: String    },
-    comments:        [ CommentSchema   ]
-});
-mongoose.model("Post", PostSchema);
-
-CommentSchema.add({
-    title:           { type: String    },
-    post:            { type: ObjectId, index: true }
-});
-mongoose.model("Comment", CommentSchema);
-*/
-
-['User'/*, 'Post', 'Comment'*/].forEach(function (m) {
-    module.exports[m] = mongoose.model(m);
-});
-
-
-/**
- * User
- */
-var UserSchema = new Schema;
-UserSchema.add({
+User.add({
     login: { type: String },
     githubId: { type: String },
     email: { type: String },
     fullName: { type: String },
     gravatarId: { type: String }
 });
-mongoose.model("User", UserSchema);
-module.exports["User"] = mongoose.model("User");module.exports["User"].modelName = "User"
+
+User.statics.findOrCreateByGithubData = function (githubUserData, promise) {
+    this.findOne( { githubId: githubUserData.id }, function(err, u) {
+        if(!u) {
+            var U = mongoose.model('User');
+            u = new U();
+            u.login         = githubUserData.login;
+            u.githubId      = githubUserData.id;
+            u.email         = githubUserData.email;
+            u.fullName      = githubUserData.name;
+            u.gravatarId    = githubUserData.gravatar_id;
+            u.createdAt     = new Date();
+            u.save();
+        }
+        return promise.fulfill(u);
+    });
+
+}
+
+mongoose.model("User", User);
+
+['User'].forEach(function (m) {
+    module.exports[m] = mongoose.model(m);
+    module.exports[m].modelName = m;
+});
