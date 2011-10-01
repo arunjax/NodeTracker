@@ -3,19 +3,19 @@ load('application');
 before(loadUser, {only: ['show', 'edit', 'update', 'destroy']});
 
 action('new', function () {
-    this.user = new User;
+    this.member = new User;
     this.title = 'New user';
     render();
 });
 
 action('create', function () {
-    this.user = new User;
+    this.member = new User;
     ['login', 'githubId', 'email', 'fullName', 'gravatarId'].forEach(function (field) {
         if (typeof body[field] !== 'undefined') {
-            this.user[field] = body[field];
+            this.member[field] = body[field];
         }
     }.bind(this));
-    this.user.save(function (errors) {
+    this.member.save(function (errors) {
         if (errors) {
             this.title = 'New user';
             flash('error', 'User can not be created');
@@ -46,16 +46,16 @@ action('edit', function () {
 });
 
 action('update', function () {
-    ['login', 'githubId', 'email', 'fullName', 'gravatarId'].forEach(function (field) {
+    ['fullName'].forEach(function (field) {
         if (typeof body[field] !== 'undefined') {
-            this.user[field] = body[field];
+            this.member[field] = body[field];
         }
     }.bind(this));
 
-    this.user.save(function (err) {
+    this.member.save(function (err) {
         if (!err) {
             flash('info', 'User updated');
-            redirect(path_to.user(this.user));
+            redirect(path_to.user(this.member));
         } else {
             this.title = 'Edit user details';
             flash('error', 'User can not be updated');
@@ -65,7 +65,7 @@ action('update', function () {
 });
 
 action('destroy', function () {
-    this.user.remove(function (error) {
+    this.member.remove(function (error) {
         if (error) {
             flash('error', 'Can not destroy user');
         } else {
@@ -76,11 +76,11 @@ action('destroy', function () {
 });
 
 function loadUser () {
-    User.findById(params.id, function (err, user) {
-        if (err || !user) {
+    User.findById(params.id, function (err, member) {
+        if (err || !member) {
             redirect(path_to.users);
         } else {
-            this.user = user;
+            this.member = member;
             next();
         }
     }.bind(this));

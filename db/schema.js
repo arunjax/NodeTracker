@@ -2,10 +2,10 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId
 
-  , User        = new Schema
+  , UserSchema = new Schema
   ;
 
-User.add({
+UserSchema.add({
     login: { type: String },
     githubId: { type: String },
     email: { type: String },
@@ -14,7 +14,7 @@ User.add({
     createdAt: {type: Date}
 });
 
-User.statics.findOrCreateByGithubData = function (githubUserData, promise) {
+UserSchema.statics.findOrCreateByGithubData = function (githubUserData, promise) {
     this.findOne( { githubId: githubUserData.id }, function(err, u) {
         if(!u) {
             var U = mongoose.model('User');
@@ -29,12 +29,9 @@ User.statics.findOrCreateByGithubData = function (githubUserData, promise) {
         }
         return promise.fulfill(u);
     });
-
 }
-
-mongoose.model("User", User);
+mongoose.model("User", UserSchema);
 
 ['User'].forEach(function (m) {
     module.exports[m] = mongoose.model(m);
-    module.exports[m].modelName = m;
 });

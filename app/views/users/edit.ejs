@@ -2,10 +2,10 @@
   <h1>Edit user</h1>
 </div>
 
-<% form_for(user, {action: path_to.user(user), method: 'PUT', id: "user_form"}, function (form) { %>
-  <%- partial('users/form.ejs', {locals: {form: form, user: user}}) %>
+<% form_for(member, {action: path_to.user(member), method: 'PUT', id: "user_form"}, function (form) { %>
+  <%- partial('users/form.ejs', {locals: {form: form, user: member}}) %>
   <div class="actions">
     <%- form.submit('Update user', {class: 'btn primary'}) %> or
-    <%- link_to('Cancel', path_to.user(user), {class: 'btn'}) %>
+    <%- link_to('Cancel', path_to.user(member), {class: 'btn'}) %>
   </div>
 <% });%>
