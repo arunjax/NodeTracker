@@ -1,5 +1,6 @@
 load('application');
 
+before(use('loginRequired'));
 before(loadUser, {only: ['show', 'edit', 'update', 'destroy']});
 
 action('new', function () {

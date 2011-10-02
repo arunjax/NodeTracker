@@ -1,4 +1,4 @@
 exports.routes = function (map) {
-    map.root('users#index');
+    map.root('home#index');
     map.resources('users');
 };
